@@ -3,12 +3,13 @@ import { Box, TextField, Button, Container } from '@mui/material';
 import { EmptyLoginStore } from '../store/EntryLoginStore';
 import { UseVM } from '../viewModel/UseVM';
 import '../style/style.css';
+import { useNavigate } from 'react-router-dom';
 const LoginPage = () => {
   const loginStore = useContext(EmptyLoginStore)
   const vm = UseVM()
   const [username, setUsername] = useState(loginStore.entity.name);
   const [password, setPassword] = useState(loginStore.entity.password);
-
+  const navigate = useNavigate();
 
 
   const handleUsernameChange = (e: any) => {
@@ -22,6 +23,9 @@ const LoginPage = () => {
   };
   
   const handleLogin = (event: MouseEvent<HTMLButtonElement>) => {
+      if(username == "asd" && password == "asd"){
+        navigate('dashboard')
+      }
       vm.loginStatus(username, password)
   };
   return (

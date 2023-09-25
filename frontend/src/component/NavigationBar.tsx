@@ -1,14 +1,11 @@
 import { Drawer, List, ListItem, ListItemIcon, ListItemText, ListSubheader } from '@mui/material';
-import { ArrowBack, Dashboard } from '@mui/icons-material';
+import { ArrowBack, Dashboard, TableView } from '@mui/icons-material';
 
 import { SetStateAction, useState } from 'react';
-
+import { useNavigate } from 'react-router-dom';
+import { TableDialog } from './Dialog';
 export const NavigationBar = () => {
-  const [selectedItem, setSelectedItem] = useState(0); // Track the selected list item
-
-  const handleItemClick = (index: SetStateAction<number>) => {
-    setSelectedItem(index);
-  };
+  const navigate = useNavigate();
 
   return (
     <Drawer variant="permanent">
@@ -16,11 +13,16 @@ export const NavigationBar = () => {
           DashBoard
       </ListSubheader>
       <List>
-        <ListItem button onClick={() => handleItemClick(0)} selected={selectedItem === 0}>
+        <ListItem onClick={() => navigate('/')}>
           <ListItemIcon>
             <ArrowBack />
           </ListItemIcon>
-          </ListItem>
+        </ListItem>
+        <ListItem onClick={() => <TableDialog/>}>
+          <ListItemIcon>
+            <TableView />
+          </ListItemIcon>
+        </ListItem>
       </List>
     </Drawer>
   );

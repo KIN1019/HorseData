@@ -3,6 +3,7 @@ import { useState } from "react";
 import { SearchProvider } from "../store/EntryLoginStore";
 import { LoginStore, EMPTY_LOGIN_STORE } from "../store/LoginStore";
 import { MainView } from "./MainView";
+import LoginPage from "./LoginView";
 
 
 export const HorseView = () => {
@@ -15,7 +16,7 @@ export const HorseView = () => {
                 setSearchModel(newSearchModel)
             }
         }}>
-            <MainView />
+            <LoginPage />
         </SearchProvider>
     )
 }
