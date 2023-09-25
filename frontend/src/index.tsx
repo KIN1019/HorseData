@@ -17,7 +17,7 @@ const router = createBrowserRouter([
     loader: App,
     children: [
       {
-        path: "/Dashboard",
+        path: "/dashboard",
         element: <DashboardView />,
         // loader: dashboardLoader,
       },
