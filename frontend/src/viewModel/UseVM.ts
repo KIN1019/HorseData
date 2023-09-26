@@ -1,12 +1,12 @@
 import { useContext } from "react"
-import { EmptyLoginStore } from "../store/EntryLoginStore"
-import { LoginVM } from "./LoginVM"
+import { EmptyDashboardStore } from "../store/EntryDashboardStore"
+import { DashBoardVM } from "./DashboardVM"
 
 export const UseVM =()=>{
-    const loginStore = useContext(EmptyLoginStore)
-    const loginVM = LoginVM({
-        stores : [loginStore],
+    const dashboardStore = useContext(EmptyDashboardStore)
+    const dashBoardVM = DashBoardVM({
+        stores : [dashboardStore],
     })
             
-    return loginVM
+    return dashBoardVM
 }

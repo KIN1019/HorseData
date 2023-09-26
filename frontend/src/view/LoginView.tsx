@@ -1,14 +1,14 @@
 import React, { useState, ChangeEvent, MouseEvent, useContext } from 'react';
 import { Box, TextField, Button, Container } from '@mui/material';
-import { EmptyLoginStore } from '../store/EntryLoginStore';
+import { EmptyDashboardStore } from '../store/EntryDashboardStore';
 import { UseVM } from '../viewModel/UseVM';
 import '../style/style.css';
 import { useNavigate } from 'react-router-dom';
 const LoginPage = () => {
-  const loginStore = useContext(EmptyLoginStore)
+  const DashboardStore = useContext(EmptyDashboardStore)
   const vm = UseVM()
-  const [username, setUsername] = useState(loginStore.entity.name);
-  const [password, setPassword] = useState(loginStore.entity.password);
+  const [username, setUsername] = useState(DashboardStore.entity.name);
+  const [password, setPassword] = useState(DashboardStore.entity.password);
   const navigate = useNavigate();
 
 

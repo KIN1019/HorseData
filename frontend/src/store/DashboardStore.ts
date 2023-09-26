@@ -1,4 +1,4 @@
-export interface LoginStore {
+export interface DashboardStore {
     name : string
     password : string
     nameStatus : boolean
@@ -6,7 +6,7 @@ export interface LoginStore {
     loginStatus : boolean
 }
 
-export const EMPTY_LOGIN_STORE : LoginStore = {
+export const EMPTY_DASHBOARD_STORE : DashboardStore = {
     name: "",
     password: "",
     nameStatus : false,

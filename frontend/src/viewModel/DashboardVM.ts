@@ -1,11 +1,11 @@
 import BaseStore from "../store/BaseStore"
-import { LoginStore } from "../store/LoginStore"
+import { DashboardStore } from "../store/DashboardStore"
 import BaseVM from "./BaseVM"
 
-interface LoginVMProps extends BaseVM {
-    stores: BaseStore<LoginStore>[],
+interface DashBoardVMProps extends BaseVM {
+    stores: BaseStore<DashboardStore>[],
 }    
-export const LoginVM = ({stores }: LoginVMProps) =>{
+export const DashBoardVM = ({stores }: DashBoardVMProps) =>{
     
     const [loginStore] = stores
     

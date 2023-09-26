@@ -1,13 +1,13 @@
 'use client'
 import { useState } from "react";
-import { SearchProvider } from "../store/EntryLoginStore";
-import { LoginStore, EMPTY_LOGIN_STORE } from "../store/LoginStore";
+import { SearchProvider } from "../store/EntryDashboardStore";
+import { DashboardStore, EMPTY_DASHBOARD_STORE } from "../store/DashboardStore";
 import { MainView } from "./MainView";
 import LoginPage from "./LoginView";
 
 
 export const HorseView = () => {
-    const [SearchModel, setSearchModel] = useState<LoginStore>(EMPTY_LOGIN_STORE);
+    const [SearchModel, setSearchModel] = useState<DashboardStore>(EMPTY_DASHBOARD_STORE);
 
     return (
         <SearchProvider value={{

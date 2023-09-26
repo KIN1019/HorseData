@@ -1,16 +1,16 @@
 import { useContext, useEffect, useState } from "react"
-import { EmptyLoginStore } from "../store/EntryLoginStore"
+import { EmptyDashboardStore } from "../store/EntryDashboardStore"
 import LoginPage from "./LoginView"
 import { DashboardView } from "./DashboardView"
 
 
 export const MainView = () =>{
 
-    const loginStore = useContext(EmptyLoginStore)
-    const [loginStatus, setLoginStatus] = useState<boolean>(loginStore.entity.loginStatus)
+    const DashboardStore = useContext(EmptyDashboardStore)
+    const [loginStatus, setLoginStatus] = useState<boolean>(DashboardStore.entity.loginStatus)
     useEffect(()=>{
-        setLoginStatus(loginStore.entity.loginStatus)
-      },[loginStore.entity])
+        setLoginStatus(DashboardStore.entity.loginStatus)
+      },[DashboardStore.entity])
 
     
     return(
