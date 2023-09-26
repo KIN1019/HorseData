@@ -7,45 +7,54 @@ interface DashBoardVMProps extends BaseVM {
 }    
 export const DashBoardVM = ({stores }: DashBoardVMProps) =>{
     
-    const [loginStore] = stores
+    const [dashboardStore] = stores
     
-    const loginStoreDispatch = loginStore.dispatch ? loginStore.dispatch : () => null
+    const dashboardStoreDispatch = dashboardStore.dispatch ? dashboardStore.dispatch : () => null
 
-
-
-    const nameStatus = (name : string) =>{
-        console.log(name)
-        loginStoreDispatch((prevState)=>({
+    const dialogStatus = (e:boolean) => {
+        dashboardStoreDispatch((prevState)=>({
             ...prevState,
-            name : name
-        }))
-
-    }
-    const passwordStatus = (password : string) =>{
-        console.log(password)
-        loginStoreDispatch((prevState)=>({
-            ...prevState,
-            password : password
+            dialogStatus : true
         }))
     }
+
+    // const nameStatus = (name : string) =>{
+    //     console.log(name)
+    //     dashboardStoreDispatch((prevState)=>({
+    //         ...prevState,
+    //         name : name
+    //     }))
+
+    // }
+    // const passwordStatus = (password : string) =>{
+    //     console.log(password)
+    //     dashboardStoreDispatch((prevState)=>({
+    //         ...prevState,
+    //         password : password
+    //     }))
+    // }
     const loginStatus = (name: string, password : string) =>{
         const correctname = "asd"
         const correctpassword = "asd"
         if(name == correctname && password == correctpassword){
-            loginStoreDispatch((prevState)=>({
+            console.log(true)
+            dashboardStoreDispatch((prevState)=>({
                 ...prevState,
                 loginStatus : true
             }))
         }else{
-            loginStoreDispatch((prevState)=>({
+            dashboardStoreDispatch((prevState)=>({
                 ...prevState,
                 loginStatus : false
             }))
         }
     }   
+
+
     return{
-        nameStatus : nameStatus,
-        passwordStatus : passwordStatus,
-        loginStatus : loginStatus
+        // nameStatus : nameStatus,
+        // passwordStatus : passwordStatus,
+        loginStatus : loginStatus,
+        dialogStatus : dialogStatus
     }
 }

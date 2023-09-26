@@ -25,6 +25,7 @@ const LoginPage = () => {
   const handleLogin = (event: MouseEvent<HTMLButtonElement>) => {
       if(username == "asd" && password == "asd"){
         navigate('dashboard')
+        vm.dialogStatus(true)
       }
       vm.loginStatus(username, password)
   };

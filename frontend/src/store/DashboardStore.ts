@@ -4,6 +4,7 @@ export interface DashboardStore {
     nameStatus : boolean
     passwordStatus : boolean
     loginStatus : boolean
+    dialogStatus : boolean
 }
 
 export const EMPTY_DASHBOARD_STORE : DashboardStore = {
@@ -11,5 +12,6 @@ export const EMPTY_DASHBOARD_STORE : DashboardStore = {
     password: "",
     nameStatus : false,
     passwordStatus: false,
-    loginStatus : false
+    loginStatus : false,
+    dialogStatus : false
 }

@@ -1,9 +1,11 @@
 import { Button, Dialog, DialogTitle, DialogContent, DialogActions, Paper, PaperProps } from '@mui/material';
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Draggable from 'react-draggable';
+import { EmptyDashboardStore } from '../store/EntryDashboardStore';
 
-export const TableDialog = () => {
+export const TableDialog = (e:boolean) => {
   const [open, setOpen] = useState(true);
+  const DashboardStore = useContext(EmptyDashboardStore)
   function PaperComponent(props: PaperProps) {
     return (
       <Draggable
@@ -14,6 +16,9 @@ export const TableDialog = () => {
       </Draggable>
     );
   }
+  useEffect(()=>{
+    console.log(DashboardStore.entity.dialogStatus)
+  },[])
   const handleOpen = () => {
     setOpen(true);
   };

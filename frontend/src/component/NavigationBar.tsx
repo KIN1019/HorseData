@@ -4,9 +4,10 @@ import { ArrowBack, Dashboard, TableView } from '@mui/icons-material';
 import { SetStateAction, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { TableDialog } from './Dialog';
+import { UseVM } from '../viewModel/UseVM';
 export const NavigationBar = () => {
   const navigate = useNavigate();
-
+  const vm = UseVM()
   return (
     <Drawer variant="permanent">
       <ListSubheader component="div" id="nested-list-subheader">
@@ -18,7 +19,7 @@ export const NavigationBar = () => {
             <ArrowBack />
           </ListItemIcon>
         </ListItem>
-        <ListItem onClick={() => <TableDialog/>}>
+        <ListItem onClick={() => vm.dialogStatus(true)}>
           <ListItemIcon>
             <TableView />
           </ListItemIcon>

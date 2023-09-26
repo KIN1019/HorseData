@@ -1,8 +1,6 @@
-'use client'
 import { useState } from "react";
 import { SearchProvider } from "../store/EntryDashboardStore";
 import { DashboardStore, EMPTY_DASHBOARD_STORE } from "../store/DashboardStore";
-import { MainView } from "./MainView";
 import LoginPage from "./LoginView";
 
 
