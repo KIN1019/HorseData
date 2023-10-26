@@ -1,3 +1,4 @@
+import dayjs from "dayjs"
 import BaseStore from "../store/BaseStore"
 import { DashboardStore } from "../store/DashboardStore"
 import BaseVM from "./BaseVM"
@@ -5,39 +6,38 @@ import BaseVM from "./BaseVM"
 interface DashBoardVMProps extends BaseVM {
     stores: BaseStore<DashboardStore>[],
 }    
-export const DashBoardVM = ({stores }: DashBoardVMProps) =>{
+export const DashBoardVM = ({stores}: DashBoardVMProps) =>{
     
     const [dashboardStore] = stores
     
     const dashboardStoreDispatch = dashboardStore.dispatch ? dashboardStore.dispatch : () => null
-
     const dialogStatus = (e:boolean) => {
-        dashboardStoreDispatch((prevState)=>({
+        dashboardStoreDispatch((prevState) => ({
             ...prevState,
-            dialogStatus : true
-        }))
+            dialogStatus: e,
+        }));
     }
 
-    // const nameStatus = (name : string) =>{
-    //     console.log(name)
-    //     dashboardStoreDispatch((prevState)=>({
-    //         ...prevState,
-    //         name : name
-    //     }))
-
-    // }
-    // const passwordStatus = (password : string) =>{
-    //     console.log(password)
-    //     dashboardStoreDispatch((prevState)=>({
-    //         ...prevState,
-    //         password : password
-    //     }))
-    // }
+    const dialogSubmit = (venue:string, round:string, date: dayjs.Dayjs | null) =>{
+        const formattedDate = date!!.format('YYYY-MM-DD');
+        const year = formattedDate.split("-")[0]
+        const month =  formattedDate.split("-")[1]
+        const day = formattedDate.split("-")[2]
+        dashboardStoreDispatch((prevState) => ({
+            ...prevState,
+            searchCriteria: {
+                venue: venue,
+                round: round,
+                year: year,
+                month: month,
+                day: day,
+              },
+        }));
+    }
     const loginStatus = (name: string, password : string) =>{
         const correctname = "asd"
         const correctpassword = "asd"
         if(name == correctname && password == correctpassword){
-            console.log(true)
             dashboardStoreDispatch((prevState)=>({
                 ...prevState,
                 loginStatus : true
@@ -52,9 +52,8 @@ export const DashBoardVM = ({stores }: DashBoardVMProps) =>{
 
 
     return{
-        // nameStatus : nameStatus,
-        // passwordStatus : passwordStatus,
         loginStatus : loginStatus,
-        dialogStatus : dialogStatus
+        dialogStatus : dialogStatus,
+        dialogSubmit : dialogSubmit
     }
 }

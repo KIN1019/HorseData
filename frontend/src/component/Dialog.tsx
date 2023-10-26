@@ -1,49 +1,93 @@
-import { Button, Dialog, DialogTitle, DialogContent, DialogActions, Paper, PaperProps } from '@mui/material';
+import { Button, Dialog, DialogTitle, DialogContent, DialogActions, Paper, PaperProps, ToggleButtonGroup, ToggleButton, Box, TextField } from '@mui/material';
 import React, { useContext, useEffect, useState } from 'react';
 import Draggable from 'react-draggable';
 import { EmptyDashboardStore } from '../store/EntryDashboardStore';
+import { UseVM } from '../viewModel/UseVM';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
+import dayjs, { Dayjs } from 'dayjs';
 
-export const TableDialog = (e:boolean) => {
-  const [open, setOpen] = useState(true);
-  const DashboardStore = useContext(EmptyDashboardStore)
-  function PaperComponent(props: PaperProps) {
-    return (
-      <Draggable
-        handle="#draggable-dialog-title"
-        cancel={'[class*="MuiDialogContent-root"]'}
-      >
-        <Paper {...props} />
-      </Draggable>
-    );
-  }
+export const TableDialog = () => {
+  const dashboardStore = useContext(EmptyDashboardStore)
+  const [open, setOpen] = useState<boolean>(dashboardStore.entity.dialogStatus);
+  const [venue, setVenue] = useState<string>('HV');
+  const [round, setRound] = useState<string>('');
+  const [date, setDate] = React.useState<Dayjs | null>(dayjs());
+  const vm = UseVM()
+
   useEffect(()=>{
-    console.log(DashboardStore.entity.dialogStatus)
-  },[])
-  const handleOpen = () => {
-    setOpen(true);
-  };
+    setOpen(dashboardStore.entity.dialogStatus)
+  },[dashboardStore.entity.dialogStatus])
 
   const handleClose = () => {
-    setOpen(false);
+    vm.dialogStatus(false)
   };
+  const handleSubmmit = () => {
+    vm.dialogSubmit(venue, round, date)
+  }
+
+  const handleVenueChange = (event: React.MouseEvent<HTMLElement>, newVenue : string) => {
+    setVenue(newVenue);
+  };
+
+ 
 
   return (
     <div>
       <Dialog
         open={open}
         onClose={handleClose}
-        PaperComponent={PaperComponent}
+        // PaperComponent={PaperComponent}
         aria-labelledby="draggable-dialog-title"
       >
-        <DialogTitle>这是对话框标题</DialogTitle>
-        <DialogContent>
-          <p>这是对话框内容。</p>
-        </DialogContent>
+      <Box display="flex" flexDirection="column" alignItems="center" justifyContent="center">
+      <DialogTitle>Data select</DialogTitle>
+      <DialogActions>
+
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <DemoContainer components={['DatePicker']}>
+            <DatePicker
+              label="Controlled picker"
+              value={date}
+              onChange={(newDate) => setDate(newDate)}
+            />
+          </DemoContainer>
+        </LocalizationProvider>
+
+      </DialogActions>
+
+      <DialogActions>
+        <ToggleButtonGroup
+          color="primary"
+          value={venue}
+          exclusive
+          onChange={handleVenueChange}
+          aria-label="Platform"
+          >
+          <ToggleButton value="HV">HV</ToggleButton>
+          <ToggleButton value="ST">ST</ToggleButton>
+        </ToggleButtonGroup>
+      </DialogActions>
+
+      <DialogActions> 
+        <TextField 
+          id="round" 
+          label="round" 
+          variant="outlined" 
+          onChange={(e)=>{setRound(e.target.value)}}/>
+      </DialogActions>
+
         <DialogActions>
-          <Button onClick={handleClose} color="primary">
-            关闭
+          <Button onClick={handleSubmmit} color="primary">
+            submmit
           </Button>
-        </DialogActions>
+          <Button onClick={handleClose} color="primary">
+            close
+          </Button>
+      </DialogActions>
+    </Box>
       </Dialog>
     </div>
   );
