@@ -1,16 +1,16 @@
-import { ToggleButton } from '@mui/material';
 import { NavigationBar } from '../component/NavigationBar';
-import TableView from './TableView';
 import { TableDialog } from '../component/Dialog';
-import { useContext, useEffect, useState } from 'react';
-import { EmptyDashboardStore, SearchProvider } from '../store/EntryDashboardStore';
+import { useState } from 'react';
+import {  SearchProvider } from '../store/EntryDashboardStore';
 import { DashboardStore, EMPTY_DASHBOARD_STORE } from '../store/DashboardStore';
-import LoginPage from './LoginView';
+import { UseVM } from '../viewModel/UseVM';
+import { Button } from '@mui/material';
+import { TableView } from './TableView';
 
 
 export const DashboardView = () =>{
     const [dashboard, setDashboard] = useState<DashboardStore>(EMPTY_DASHBOARD_STORE);
-
+    const vm = UseVM()
     return (
         <SearchProvider value={{
             entity: dashboard,
@@ -19,10 +19,16 @@ export const DashboardView = () =>{
             }
         }}>
         <div style={{ display: 'flex' }}>
+            <div>
             <NavigationBar/>
+            </div>
+            <div>
             <TableView/>
             <TableDialog/>
+            </div>
         </div>
+
+
         </SearchProvider>
     )
 }

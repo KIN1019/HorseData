@@ -5,6 +5,7 @@ export interface DashboardStore {
     passwordStatus : boolean
     loginStatus : boolean
     dialogStatus : boolean
+    submitStatus : boolean
     searchCriteria : SearchCriteria
 }
 
@@ -15,19 +16,16 @@ export const EMPTY_DASHBOARD_STORE : DashboardStore = {
     passwordStatus: false,
     loginStatus : false,
     dialogStatus : false,
+    submitStatus : false,
     searchCriteria: {
+        date : "",
         venue: "",
-        round: "",
-        year: "",
-        month: "",
-        day: "",
+        round: ""
       },
 }
 
-interface SearchCriteria {
+export interface SearchCriteria {
+    date : string
     venue : string
     round : string
-    year : string
-    month : string
-    day : string
 }

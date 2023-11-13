@@ -20,18 +20,14 @@ export const DashBoardVM = ({stores}: DashBoardVMProps) =>{
 
     const dialogSubmit = (venue:string, round:string, date: dayjs.Dayjs | null) =>{
         const formattedDate = date!!.format('YYYY-MM-DD');
-        const year = formattedDate.split("-")[0]
-        const month =  formattedDate.split("-")[1]
-        const day = formattedDate.split("-")[2]
         dashboardStoreDispatch((prevState) => ({
             ...prevState,
             searchCriteria: {
+                date : formattedDate,
                 venue: venue,
-                round: round,
-                year: year,
-                month: month,
-                day: day,
+                round: round
               },
+            submitStatus : true
         }));
     }
     const loginStatus = (name: string, password : string) =>{
@@ -50,10 +46,17 @@ export const DashBoardVM = ({stores}: DashBoardVMProps) =>{
         }
     }   
 
+    const stopFetchTable = () => {
+        dashboardStoreDispatch((prevState) => ({
+            ...prevState,
+            submitStatus : false
+        }));
+    }
 
     return{
         loginStatus : loginStatus,
         dialogStatus : dialogStatus,
-        dialogSubmit : dialogSubmit
+        dialogSubmit : dialogSubmit,
+        stopFetchTable : stopFetchTable
     }
 }

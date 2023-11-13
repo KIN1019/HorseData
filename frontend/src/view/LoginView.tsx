@@ -7,26 +7,36 @@ import { useNavigate } from 'react-router-dom';
 const LoginPage = () => {
   const DashboardStore = useContext(EmptyDashboardStore)
   const vm = UseVM()
-  const [username, setUsername] = useState(DashboardStore.entity.name);
-  const [password, setPassword] = useState(DashboardStore.entity.password);
+  const [username, setUsername] = useState<string>(DashboardStore.entity.name);
+  const [password, setPassword] = useState<string>(DashboardStore.entity.password);
+  const [useNameError, setuseNameError] = useState(false);
+  const [passwordError, setPassWordError] = useState(false);
   const navigate = useNavigate();
 
 
   const handleUsernameChange = (e: any) => {
     setUsername(e.target.value)
-
   };
 
   const handlePasswordChange = (e: any) => {
     setPassword(e.target.value)
-
   };
   
   const handleLogin = (event: MouseEvent<HTMLButtonElement>) => {
-      if(username == "asd" && password == "asd"){
-        navigate('dashboard')
-        vm.dialogStatus(true)
+      if(username == ""){
+        setuseNameError(true)
+      }else{
+        setuseNameError(false)
       }
+      if(password == ""){
+        setPassWordError(true)
+      }else{
+        setPassWordError(false)
+      }
+        if(username == "asd" && password == "asd"){
+          navigate('dashboard')
+        }
+      
       vm.loginStatus(username, password)
   };
   return (
@@ -57,6 +67,8 @@ const LoginPage = () => {
           value={username}
           onChange={handleUsernameChange}
           margin="normal"
+          error={useNameError}
+          helperText={useNameError ? 'empty data' : ''}
         />
         <TextField
           label="Password"
@@ -64,6 +76,8 @@ const LoginPage = () => {
           value={password}
           onChange={handlePasswordChange}
           margin="normal"
+          error={passwordError}
+          helperText={passwordError ? 'empty data' : ''}
         />
          <div className="loginButton" >
           <Button variant="contained" onClick={handleLogin}>
@@ -72,7 +86,6 @@ const LoginPage = () => {
         </div>
         </Box>
         </Container>
-
   );
 };
 

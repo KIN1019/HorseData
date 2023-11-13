@@ -1,6 +1,5 @@
 import { Button, Dialog, DialogTitle, DialogContent, DialogActions, Paper, PaperProps, ToggleButtonGroup, ToggleButton, Box, TextField } from '@mui/material';
 import React, { useContext, useEffect, useState } from 'react';
-import Draggable from 'react-draggable';
 import { EmptyDashboardStore } from '../store/EntryDashboardStore';
 import { UseVM } from '../viewModel/UseVM';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -15,23 +14,38 @@ export const TableDialog = () => {
   const [venue, setVenue] = useState<string>('HV');
   const [round, setRound] = useState<string>('');
   const [date, setDate] = React.useState<Dayjs | null>(dayjs());
+  const [error, setError] = useState(false);
   const vm = UseVM()
 
   useEffect(()=>{
     setOpen(dashboardStore.entity.dialogStatus)
   },[dashboardStore.entity.dialogStatus])
-
   const handleClose = () => {
     vm.dialogStatus(false)
+    
   };
-  const handleSubmmit = () => {
-    vm.dialogSubmit(venue, round, date)
+  useEffect(()=>{
+    setError(false)
+    setRound("")
+
+  },[dashboardStore.entity.dialogStatus])
+  const handleSubmit = () => {
+    if(round == ""){
+      setError(true)
+    }else{
+      vm.dialogSubmit(venue, round, date)
+      vm.dialogStatus(false)
+
+    }
   }
 
   const handleVenueChange = (event: React.MouseEvent<HTMLElement>, newVenue : string) => {
     setVenue(newVenue);
   };
 
+  const handleInputChange = (event:any) => {
+    setRound(event.target.value);
+  };
  
 
   return (
@@ -68,6 +82,9 @@ export const TableDialog = () => {
           >
           <ToggleButton value="HV">HV</ToggleButton>
           <ToggleButton value="ST">ST</ToggleButton>
+          <ToggleButton value="S1">S1</ToggleButton>
+          <ToggleButton value="S2">S2</ToggleButton>
+          <ToggleButton value="S3">S3</ToggleButton>
         </ToggleButtonGroup>
       </DialogActions>
 
@@ -76,12 +93,15 @@ export const TableDialog = () => {
           id="round" 
           label="round" 
           variant="outlined" 
-          onChange={(e)=>{setRound(e.target.value)}}/>
+          onChange={handleInputChange}
+          error={error}
+          helperText={error ? 'empty data' : ''}
+        />
       </DialogActions>
 
-        <DialogActions>
-          <Button onClick={handleSubmmit} color="primary">
-            submmit
+      <DialogActions>
+          <Button onClick={handleSubmit} color="primary">
+            submit
           </Button>
           <Button onClick={handleClose} color="primary">
             close
