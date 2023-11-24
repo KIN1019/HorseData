@@ -20,11 +20,11 @@ export const DashboardView = () =>{
         }}>
         <div style={{ display: 'flex' }}>
             <div>
-            <NavigationBar/>
+                <NavigationBar/>
             </div>
             <div>
-            <TableView/>
-            <TableDialog/>
+                <TableView/>
+                <TableDialog/>
             </div>
         </div>
 

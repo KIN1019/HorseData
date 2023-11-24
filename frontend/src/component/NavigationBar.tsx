@@ -11,7 +11,7 @@ export const NavigationBar = () => {
   const vm = UseVM();
 
   return (
-    <Drawer variant="permanent" sx={{ width: '60px', flexShrink: 0 }}>
+    <Drawer variant="permanent" sx={{ width: '48px', flexShrink: 0 }}>
       <List sx={{ width: '48px' }}>
 
         {/* Dashboard Header */}

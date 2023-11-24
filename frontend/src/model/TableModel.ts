@@ -7,7 +7,7 @@ export const tableModel = () => {
         var data = JSON.stringify(searchCriteria)
         var config = {
           method: 'post',
-          url: 'http://localhost:8080/post_json',
+          url: 'http://localhost:5000/post_json',
           headers: {
             'Content-Type': 'application/json'
           },
